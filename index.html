@@ -194,6 +194,7 @@
                 d3.select(this).style('stroke', colortoset).style('stroke-width',  sizetoset);
                 d3.select(`.COUNTRY-CODE-${d.id}`).style('stroke', colortoset).style('stroke-width',  sizetoset);
 
+
                 if (this.style.stroke === 'green'){
                     scatterSelection.push(d);
                 }
@@ -251,15 +252,20 @@
 
             scatterplot.selectAll('.dot')
             .style('stroke', function(e){
-                if (e.id === d.id){
-                    let colortoset = this.style.stroke === 'green' ?  'none' : 'green';
+                if (e.id === d.id || e['Country'].includes(d.properties.name)){
                     return colortoset;
+                }
+                else{
+                    return this.style.stroke;
                 }
             })
             .style('stroke-width', function(e){
-                if (e.id === d.id){
-                    let sizetoset = this.style.strokeWidth === '2' ? '0.3' : '2';
+
+                if (e.id === d.id  || e['Country'].includes(d.properties.name)){
                     return sizetoset;
+                }
+                else{
+                    return this.style.strokeWidth;
                 }
             });
 
